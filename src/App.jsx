@@ -13,7 +13,18 @@ function App() {
   function handleLocationRequest() {
     if (!navigator.geolocation) return;
     navigator.geolocation.getCurrentPosition(
-      ({ coords }) => searchCity(`${coords.latitude},${coords.longitude}`),
+      ({ coords }) => {
+        // Use reverse geocoding to get city name first
+        fetch(
+          `https://api.openweathermap.org/geo/1.0/reverse?lat=${coords.latitude}&lon=${coords.longitude}&limit=1&appid=${import.meta.env.VITE_API_KEY || "0a9ab475141038b65fcea231b8a22312"}`,
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            if (data && data[0]) {
+              searchCity(data[0].name); // gets "Bangalore" not a landmark
+            }
+          });
+      },
       () => console.log("Location denied"),
     );
   }
@@ -45,5 +56,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
