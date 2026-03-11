@@ -51,8 +51,12 @@ function App() {
       <WeatherBackground theme={theme} />
       <div className="app-shell">
         <section className="hero-panel glass-card">
-          <p className="eyebrow">Weather with product thinking</p>
+          <p className="eyebrow">Weather intelligence</p>
           <h1>SkyBrief</h1>
+          <p className="hero-copy">
+            Search any city and review current conditions, near-term forecast,
+            and practical daily guidance in one place.
+          </p>
           <SearchBar
             onSearch={searchCity}
             onLocationRequest={handleLocationRequest}
@@ -60,7 +64,7 @@ function App() {
             unit={unit}
             onToggleUnit={toggleUnit}
           />
-          {error && <p style={{ color: "#fca5a5" }}>{error}</p>}
+          {error && <p className="error-text">{error}</p>}
           <SavedCities currentCity={weather?.name} onCitySelect={searchCity} />
         </section>
 

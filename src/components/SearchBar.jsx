@@ -13,6 +13,7 @@ function SearchBar({
     e.preventDefault();
     if (!input.trim()) return;
     onSearch(input.trim());
+    setInput("");
   }
 
   return (
@@ -20,13 +21,13 @@ function SearchBar({
       <form className="search-form" onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Search for a city"
+          placeholder="Search your city"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           disabled={isLoading}
         />
         <button className="primary-btn" type="submit" disabled={isLoading}>
-          Search
+          {isLoading ? "⏳ Loading..." : "🔍 Search"}
         </button>
         <button
           className="ghost-btn"
@@ -34,7 +35,7 @@ function SearchBar({
           onClick={onLocationRequest}
           disabled={isLoading}
         >
-          Use my location
+          📍 Use my location
         </button>
       </form>
 
@@ -44,13 +45,13 @@ function SearchBar({
             className={`unit-btn ${unit === "metric" ? "is-active" : ""}`}
             onClick={() => unit !== "metric" && onToggleUnit()}
           >
-            C
+            °C
           </button>
           <button
             className={`unit-btn ${unit === "imperial" ? "is-active" : ""}`}
             onClick={() => unit !== "imperial" && onToggleUnit()}
           >
-            F
+            °F
           </button>
         </div>
       </div>
