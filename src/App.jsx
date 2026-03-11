@@ -1,7 +1,7 @@
 import useWeather from "./hooks/useWeather";
 import SearchBar from "./components/SearchBar";
 import OverviewCard from "./components/OverviewCard";
-
+import ForecastGrid from "./components/ForecastGrid";
 function App() {
   const { weather, forecast, isLoading, error, unit, searchCity, toggleUnit } =
     useWeather();
@@ -17,6 +17,7 @@ function App() {
 
       <section className="dashboard-panel">
         <OverviewCard weather={weather} unit={unit} />
+        <ForecastGrid forecast={forecast} unit={unit} />
       </section>
     </div>
   );
