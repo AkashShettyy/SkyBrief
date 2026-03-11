@@ -5,6 +5,7 @@ import ForecastGrid from "./components/ForecastGrid";
 import DayBrief from "./components/DayBrief";
 import Conditions from "./components/Conditions";
 import SavedCities from "./components/SavedCities";
+import { useEffect } from "react";
 
 function App() {
   const { weather, forecast, isLoading, error, unit, searchCity, toggleUnit } =
@@ -28,6 +29,18 @@ function App() {
       () => console.log("Location denied"),
     );
   }
+  useEffect(() => {
+    if (!weather) return;
+    const condition = weather.weather[0].main.toLowerCase();
+    let theme = "default";
+    if (condition.includes("clear")) theme = "clear";
+    else if (condition.includes("cloud")) theme = "clouds";
+    else if (condition.includes("rain") || condition.includes("drizzle"))
+      theme = "rain";
+    else if (condition.includes("thunder")) theme = "storm";
+    else if (condition.includes("snow")) theme = "snow";
+    document.body.dataset.theme = theme;
+  }, [weather]);
 
   return (
     <div className="app-shell">

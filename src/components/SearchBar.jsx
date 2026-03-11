@@ -17,7 +17,7 @@ function SearchBar({
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="search-form" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Search for a city"
@@ -25,10 +25,15 @@ function SearchBar({
           onChange={(e) => setInput(e.target.value)}
           disabled={isLoading}
         />
-        <button type="submit" disabled={isLoading}>
+        <button className="primary-btn" type="submit" disabled={isLoading}>
           Search
         </button>
-        <button type="button" onClick={onLocationRequest} disabled={isLoading}>
+        <button
+          className="ghost-btn"
+          type="button"
+          onClick={onLocationRequest}
+          disabled={isLoading}
+        >
           Use my location
         </button>
       </form>
