@@ -4,6 +4,7 @@ import OverviewCard from "./components/OverviewCard";
 import ForecastGrid from "./components/ForecastGrid";
 import DayBrief from "./components/DayBrief";
 import Conditions from "./components/Conditions";
+import SavedCities from "./components/SavedCities";
 
 function App() {
   const { weather, forecast, isLoading, error, unit, searchCity, toggleUnit } =
@@ -16,6 +17,8 @@ function App() {
         <h1>SkyBrief</h1>
         <SearchBar onSearch={searchCity} isLoading={isLoading} />
         {error && <p style={{ color: "#fca5a5" }}>{error}</p>}
+
+        <SavedCities currentCity={weather?.name} onCitySelect={searchCity} />
       </section>
 
       <section className="dashboard-panel">
