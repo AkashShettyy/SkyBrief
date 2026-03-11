@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { fetchWeatherByCity, fetchForecast } from "../services/weatherService";
 
 function useWeather() {
@@ -7,11 +7,13 @@ function useWeather() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [unit, setUnit] = useState("metric");
+  const lastCityRef = useRef(null);
 
   const searchCity = useCallback(
     async (city) => {
       setIsLoading(true);
       setError(null);
+      lastCityRef.current = city;
 
       try {
         const weatherData = await fetchWeatherByCity(city, unit);
@@ -35,15 +37,13 @@ function useWeather() {
     setUnit((prev) => (prev === "metric" ? "imperial" : "metric"));
   }, []);
 
-  return {
-    weather,
-    forecast,
-    isLoading,
-    error,
-    unit,
-    searchCity,
-    toggleUnit,
-  };
+  useEffect(() => {
+    if (lastCityRef.current) {
+      searchCity(lastCityRef.current);
+    }
+  }, [unit]);
+
+  return { weather, forecast, isLoading, error, unit, searchCity, toggleUnit };
 }
 
 export default useWeather;

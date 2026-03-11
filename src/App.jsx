@@ -10,14 +10,27 @@ function App() {
   const { weather, forecast, isLoading, error, unit, searchCity, toggleUnit } =
     useWeather();
 
+  function handleLocationRequest() {
+    if (!navigator.geolocation) return;
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => searchCity(`${coords.latitude},${coords.longitude}`),
+      () => console.log("Location denied"),
+    );
+  }
+
   return (
     <div className="app-shell">
       <section className="hero-panel glass-card">
         <p className="eyebrow">Weather with product thinking</p>
         <h1>SkyBrief</h1>
-        <SearchBar onSearch={searchCity} isLoading={isLoading} />
+        <SearchBar
+          onSearch={searchCity}
+          onLocationRequest={handleLocationRequest}
+          isLoading={isLoading}
+          unit={unit}
+          onToggleUnit={toggleUnit}
+        />
         {error && <p style={{ color: "#fca5a5" }}>{error}</p>}
-
         <SavedCities currentCity={weather?.name} onCitySelect={searchCity} />
       </section>
 

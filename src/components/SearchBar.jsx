@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-function SearchBar({ onSearch, onLocationRequest, isLoading }) {
+function SearchBar({
+  onSearch,
+  onLocationRequest,
+  isLoading,
+  unit,
+  onToggleUnit,
+}) {
   const [input, setInput] = useState("");
 
   function handleSubmit(e) {
@@ -10,21 +16,40 @@ function SearchBar({ onSearch, onLocationRequest, isLoading }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Search for a city"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        disabled={isLoading}
-      />
-      <button type="submit" disabled={isLoading}>
-        Search
-      </button>
-      <button type="button" onClick={onLocationRequest} disabled={isLoading}>
-        Use my location
-      </button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Search for a city"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          disabled={isLoading}
+        />
+        <button type="submit" disabled={isLoading}>
+          Search
+        </button>
+        <button type="button" onClick={onLocationRequest} disabled={isLoading}>
+          Use my location
+        </button>
+      </form>
+
+      <div className="toolbar">
+        <div className="unit-toggle">
+          <button
+            className={`unit-btn ${unit === "metric" ? "is-active" : ""}`}
+            onClick={() => unit !== "metric" && onToggleUnit()}
+          >
+            C
+          </button>
+          <button
+            className={`unit-btn ${unit === "imperial" ? "is-active" : ""}`}
+            onClick={() => unit !== "imperial" && onToggleUnit()}
+          >
+            F
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
