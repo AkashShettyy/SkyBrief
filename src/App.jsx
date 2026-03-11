@@ -1,22 +1,20 @@
+import useWeather from "./hooks/useWeather";
 import SearchBar from "./components/SearchBar";
 
 function App() {
-  function handleSearch(city) {
-    console.log("Searching for:", city);
-  }
-
-  function handleLocationRequest() {
-    console.log("Location requested");
-  }
+  const { weather, forecast, isLoading, error, unit, searchCity, toggleUnit } =
+    useWeather();
 
   return (
     <div>
       <h1>SkyBrief</h1>
-      <SearchBar
-        onSearch={handleSearch}
-        onLocationRequest={handleLocationRequest}
-        isLoading={false}
-      />
+      <SearchBar onSearch={searchCity} isLoading={isLoading} />
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {weather && (
+        <p>
+          {weather.name} — {Math.round(weather.main.temp)}°
+        </p>
+      )}
     </div>
   );
 }
