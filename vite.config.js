@@ -3,5 +3,5 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/skybrief/", // ← add this, must match your repo name exactly
+  base: "/SkyBrief/", // ← add this, must match your repo name exactly
 });
