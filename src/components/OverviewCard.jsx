@@ -1,4 +1,9 @@
 import { getTemperatureUnit, getWindUnit } from "../utils/units";
+import {
+  getConditionBriefing,
+  getConditionLabel,
+  getWeatherTheme,
+} from "../utils/weatherConditions";
 
 function OverviewCard({ weather, unit }) {
   if (!weather) return null;
@@ -25,43 +30,11 @@ function OverviewCard({ weather, unit }) {
     });
   }
 
-  function getThemeName(condition) {
-    const c = condition.toLowerCase();
-    if (c.includes("clear")) return "clear";
-    if (c.includes("cloud")) return "clouds";
-    if (c.includes("rain") || c.includes("drizzle")) return "rain";
-    if (c.includes("thunder")) return "storm";
-    if (c.includes("snow")) return "snow";
-    return "default";
-  }
-
-  function getWeatherIcon(condition) {
-    const c = condition.toLowerCase();
-    if (c.includes("clear")) return "Clear";
-    if (c.includes("cloud")) return "Clouds";
-    if (c.includes("rain") || c.includes("drizzle")) return "Rain";
-    if (c.includes("thunder")) return "Storm";
-    if (c.includes("snow")) return "Snow";
-    return "Sky";
-  }
-
-  function getBriefing(condition) {
-    const c = condition.toLowerCase();
-    if (c.includes("clear")) return "Clear conditions with stable visibility.";
-    if (c.includes("cloud")) return "Cloud cover is present but conditions remain steady.";
-    if (c.includes("rain") || c.includes("drizzle"))
-      return "Rain activity is active. Expect reduced comfort outdoors.";
-    if (c.includes("thunder"))
-      return "Storm conditions may shift quickly. Plan with caution.";
-    if (c.includes("snow")) return "Cold conditions with snow impacting visibility.";
-    return "Stable atmospheric conditions across the city.";
-  }
-
   const description = weather.weather[0].description;
-  const theme = getThemeName(weather.weather[0].main);
+  const theme = getWeatherTheme(weather.weather[0].main);
   const conditionLabel =
     description.charAt(0).toUpperCase() + description.slice(1);
-  const iconLabel = getWeatherIcon(weather.weather[0].main);
+  const iconLabel = getConditionLabel(weather.weather[0].main);
 
   return (
     <div className={`overview-card glass-card weather-${theme}`}>
@@ -96,7 +69,9 @@ function OverviewCard({ weather, unit }) {
           <p>
             Wind {weather.wind.speed.toFixed(1)} {windUnit}
           </p>
-          <p className="summary-copy">{getBriefing(weather.weather[0].main)}</p>
+          <p className="summary-copy">
+            {getConditionBriefing(weather.weather[0].main)}
+          </p>
         </div>
       </div>
 
