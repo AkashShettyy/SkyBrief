@@ -1,7 +1,9 @@
+import { getTemperatureUnit } from "../utils/units";
+
 function ForecastGrid({ forecast, unit }) {
   if (!forecast) return null;
 
-  const unitSymbol = unit === "metric" ? "°C" : "°F";
+  const unitSymbol = getTemperatureUnit(unit);
   const items = forecast.list.slice(0, 5);
 
   function getWeatherIcon(condition) {
