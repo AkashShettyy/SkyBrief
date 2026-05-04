@@ -1,6 +1,14 @@
 import config from "../config";
 
+function assertApiKey() {
+  if (!config.apiKey) {
+    throw new Error("Missing OpenWeather API key");
+  }
+}
+
 export async function fetchWeatherByCity(query, unit = "metric") {
+  assertApiKey();
+
   let url;
 
   if (typeof query === "string" && query.includes(",")) {
@@ -19,6 +27,8 @@ export async function fetchWeatherByCity(query, unit = "metric") {
 }
 
 export async function fetchForecast(lat, lon, unit = "metric") {
+  assertApiKey();
+
   const url = `${config.baseUrl}/forecast?lat=${lat}&lon=${lon}&appid=${config.apiKey}&units=${unit}`;
 
   const response = await fetch(url);
