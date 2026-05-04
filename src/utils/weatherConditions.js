@@ -30,3 +30,8 @@ export function getConditionBriefing(condition) {
   if (value.includes("snow")) return "Cold conditions with snow impacting visibility.";
   return "Stable atmospheric conditions across the city.";
 }
+
+export function formatWeatherDescription(description) {
+  if (!description) return "";
+  return description.charAt(0).toUpperCase() + description.slice(1);
+}
