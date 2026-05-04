@@ -1,4 +1,5 @@
 import { getTemperatureUnit } from "../utils/units";
+import { formatWeatherDescription } from "../utils/weatherConditions";
 
 function ForecastGrid({ forecast, unit }) {
   if (!forecast) return null;
@@ -45,8 +46,7 @@ function ForecastGrid({ forecast, unit }) {
                 {unitSymbol}
               </p>
               <p className="forecast-desc">
-                {summary.description.charAt(0).toUpperCase() +
-                  summary.description.slice(1)}
+                {formatWeatherDescription(summary.description)}
               </p>
             </article>
           );
