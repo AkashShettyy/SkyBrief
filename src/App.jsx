@@ -14,9 +14,15 @@ function App() {
     useWeather();
 
   const [theme, setTheme] = useState("default");
+  const [locationError, setLocationError] = useState(null);
 
   function handleLocationRequest() {
-    if (!navigator.geolocation) return;
+    if (!navigator.geolocation) {
+      setLocationError("Location is not supported by this browser.");
+      return;
+    }
+
+    setLocationError(null);
     navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
         fetch(
@@ -29,7 +35,7 @@ function App() {
             }
           });
       },
-      () => console.log("Location denied"),
+      () => setLocationError("Location permission was denied."),
     );
   }
 
@@ -58,7 +64,9 @@ function App() {
             unit={unit}
             onToggleUnit={toggleUnit}
           />
-          {error && <p className="error-text">{error}</p>}
+          {(error || locationError) && (
+            <p className="error-text">{error || locationError}</p>
+          )}
           <SavedCities currentCity={weather?.name} onCitySelect={searchCity} />
         </section>
 
