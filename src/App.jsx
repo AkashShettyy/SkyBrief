@@ -39,6 +39,11 @@ function App() {
     );
   }
 
+  function handleCitySearch(city) {
+    setLocationError(null);
+    searchCity(city);
+  }
+
   useEffect(() => {
     if (!weather) return;
     const newTheme = getWeatherTheme(weather.weather[0].main);
@@ -58,7 +63,7 @@ function App() {
             and practical daily guidance in one place.
           </p>
           <SearchBar
-            onSearch={searchCity}
+            onSearch={handleCitySearch}
             onLocationRequest={handleLocationRequest}
             isLoading={isLoading}
             unit={unit}
