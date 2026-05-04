@@ -4,12 +4,11 @@ export async function fetchWeatherByCity(query, unit = "metric") {
   let url;
 
   if (typeof query === "string" && query.includes(",")) {
-    // it's coordinates from geolocation
     const [lat, lon] = query.split(",");
     url = `${config.baseUrl}/weather?lat=${lat}&lon=${lon}&appid=${config.apiKey}&units=${unit}`;
   } else {
-    // it's a city name
-    url = `${config.baseUrl}/weather?q=${query}&appid=${config.apiKey}&units=${unit}`;
+    const city = encodeURIComponent(String(query).trim());
+    url = `${config.baseUrl}/weather?q=${city}&appid=${config.apiKey}&units=${unit}`;
   }
 
   const response = await fetch(url);
