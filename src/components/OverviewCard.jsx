@@ -3,6 +3,7 @@ import {
   getConditionBriefing,
   getConditionLabel,
   getWeatherTheme,
+  formatWeatherDescription,
 } from "../utils/weatherConditions";
 
 function OverviewCard({ weather, unit }) {
@@ -32,8 +33,7 @@ function OverviewCard({ weather, unit }) {
 
   const description = weather.weather[0].description;
   const theme = getWeatherTheme(weather.weather[0].main);
-  const conditionLabel =
-    description.charAt(0).toUpperCase() + description.slice(1);
+  const conditionLabel = formatWeatherDescription(description);
   const iconLabel = getConditionLabel(weather.weather[0].main);
 
   return (
