@@ -1,3 +1,5 @@
+import { formatVisibilityDistance, getTemperatureUnit } from "../utils/units";
+
 function Conditions({ weather, forecast, unit }) {
   if (!weather) return null;
 
@@ -6,19 +8,12 @@ function Conditions({ weather, forecast, unit }) {
     const first = items[0].main.temp;
     const last = items[items.length - 1].main.temp;
     const diff = last - first;
-    const symbol = unit === "metric" ? "°C" : "°F";
+    const symbol = getTemperatureUnit(unit);
 
     if (Math.abs(diff) < 1) return "Stable over the next few hours";
     return diff > 0
       ? `Warming by ${Math.round(diff)}${symbol} over next ${items.length * 3}hrs`
       : `Cooling by ${Math.abs(Math.round(diff))}${symbol} over next ${items.length * 3}hrs`;
-  }
-
-  function formatVisibility(visibility) {
-    if (!visibility && visibility !== 0) return "--";
-    return unit === "metric"
-      ? `${(visibility / 1000).toFixed(1)} km`
-      : `${(visibility / 1609).toFixed(1)} mi`;
   }
 
   const forecastItems = forecast?.list.slice(0, 5);
@@ -32,7 +27,7 @@ function Conditions({ weather, forecast, unit }) {
       <dl className="detail-list">
         <div>
           <dt>Visibility</dt>
-          <dd>{formatVisibility(weather.visibility)}</dd>
+          <dd>{formatVisibilityDistance(weather.visibility, unit)}</dd>
         </div>
         <div>
           <dt>Pressure</dt>
