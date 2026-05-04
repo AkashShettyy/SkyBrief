@@ -7,6 +7,7 @@ import DayBrief from "./components/DayBrief";
 import Conditions from "./components/Conditions";
 import SavedCities from "./components/SavedCities";
 import WeatherBackground from "./components/WeatherBackground";
+import { getWeatherTheme } from "./utils/weatherConditions";
 
 function App() {
   const { weather, forecast, isLoading, error, unit, searchCity, toggleUnit } =
@@ -34,14 +35,7 @@ function App() {
 
   useEffect(() => {
     if (!weather) return;
-    const condition = weather.weather[0].main.toLowerCase();
-    let newTheme = "default";
-    if (condition.includes("clear")) newTheme = "clear";
-    else if (condition.includes("cloud")) newTheme = "clouds";
-    else if (condition.includes("rain") || condition.includes("drizzle"))
-      newTheme = "rain";
-    else if (condition.includes("thunder")) newTheme = "storm";
-    else if (condition.includes("snow")) newTheme = "snow";
+    const newTheme = getWeatherTheme(weather.weather[0].main);
     document.body.dataset.theme = newTheme;
     setTheme(newTheme);
   }, [weather]);
