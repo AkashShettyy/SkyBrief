@@ -1,3 +1,5 @@
+import { getTemperatureUnit, getWindUnit } from "../utils/units";
+
 function OverviewCard({ weather, unit }) {
   if (!weather) return null;
 
@@ -5,8 +7,8 @@ function OverviewCard({ weather, unit }) {
   const feelsLike = Math.round(weather.main.feels_like);
   const tempMin = Math.round(weather.main.temp_min);
   const tempMax = Math.round(weather.main.temp_max);
-  const unitSymbol = unit === "metric" ? "°C" : "°F";
-  const windUnit = unit === "metric" ? "m/s" : "mph";
+  const unitSymbol = getTemperatureUnit(unit);
+  const windUnit = getWindUnit(unit);
 
   function formatTime(unixSeconds, offset) {
     const date = new Date((unixSeconds + offset) * 1000);
