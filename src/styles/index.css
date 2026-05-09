@@ -663,32 +663,37 @@ h2 {
 }
 
 .advisory-text {
-  margin: 18px 0 0;
-  line-height: 1.64;
-  font-size: 0.94rem;
+  margin: 20px 0 0;
+  line-height: 1.7;
+  font-size: 0.96rem;
   font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.01em;
 }
 
 .detail-list {
-  margin: 18px 0 0;
+  margin: 22px 0 0;
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 .detail-list dt {
   display: block;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: var(--label);
+  color: #a3d9ff;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .detail-list dd {
   display: block;
   margin-left: 0;
-  margin-top: 4px;
-  font-size: 0.94rem;
-  font-weight: 700;
-  line-height: 1.42;
+  margin-top: 6px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.45;
 }
 
 .forecast-card .panel-header {
