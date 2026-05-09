@@ -45,33 +45,33 @@ body {
 }
 
 body[data-theme="clear"] {
-  --bg-top: #1b4d72;
-  --bg-mid: #4386bc;
-  --bg-bottom: #97c8e5;
+  --bg-top: #0e3052;
+  --bg-mid: #256da6;
+  --bg-bottom: #70b8e6;
 }
 
 body[data-theme="clouds"] {
-  --bg-top: #4e6f89;
-  --bg-mid: #84a4bf;
-  --bg-bottom: #c5dceb;
+  --bg-top: #2c475d;
+  --bg-mid: #5f89ab;
+  --bg-bottom: #aecce2;
 }
 
 body[data-theme="rain"] {
-  --bg-top: #285377;
-  --bg-mid: #5d8bb0;
-  --bg-bottom: #a8c5da;
+  --bg-top: #153856;
+  --bg-mid: #487aa4;
+  --bg-bottom: #8db5d6;
 }
 
 body[data-theme="storm"] {
-  --bg-top: #2b4260;
-  --bg-mid: #5d7ea2;
-  --bg-bottom: #9db6cc;
+  --bg-top: #162438;
+  --bg-mid: #3a5676;
+  --bg-bottom: #799bb6;
 }
 
 body[data-theme="snow"] {
-  --bg-top: #678ead;
-  --bg-mid: #a1c2d9;
-  --bg-bottom: #dcecf6;
+  --bg-top: #436988;
+  --bg-mid: #7aa5c4;
+  --bg-bottom: #c6dfea;
 }
 
 button,
