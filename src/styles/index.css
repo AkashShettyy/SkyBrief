@@ -651,15 +651,25 @@ h2 {
 .pill {
   display: inline-flex;
   align-items: center;
-  padding: 8px 12px;
+  padding: 8px 14px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.14);
-  color: var(--text);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  font-size: 0.72rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: #cce6ff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 0.75rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
+  transition: all 250ms ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pill:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(138, 210, 255, 0.4);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .advisory-text {
